@@ -24,51 +24,6 @@ A personal portfolio website built with React, TypeScript, and Tailwind CSS. It 
 | Icons      | Lucide React                          |
 | Email      | EmailJS                               |
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or pnpm
-
-### Installation
-
-```bash
-# Clone the repo
-git clone https://github.com/ShryCreates/Portfolio.git
-cd Portfolio/Shreya_Portfolio
-
-# Install dependencies
-npm install
-
-# Create environment file
-cp .env.local.example .env.local
-# Fill in your EmailJS keys in .env.local
-
-# Start dev server
-npm run dev
-```
-
-### Environment Variables
-
-Create a `.env.local` file in the `Shreya_Portfolio` directory:
-
-```env
-VITE_EMAILJS_SERVICE_ID=your_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_public_key
-```
-
-Get these values from [emailjs.com](https://www.emailjs.com) after setting up your account and email service.
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-Output will be in the `dist/` folder.
-
 ## Project Structure
 
 ```
