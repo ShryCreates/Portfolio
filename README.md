@@ -4,7 +4,7 @@ A personal portfolio website built with React, TypeScript, and Tailwind CSS. It 
 
 ## Live Demo
 
-> Coming soon — deploy on Vercel to get a live link.
+[> Deployed on Render to get a live link.](https://portfolio-i6j6.onrender.com)
 
 ## Features
 
