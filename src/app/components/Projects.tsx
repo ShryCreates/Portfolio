@@ -1,170 +1,290 @@
 import { motion } from "motion/react";
-import { Github, ExternalLink, Server, Brain, ShieldAlert, Music, Gamepad2 } from "lucide-react";
+import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
+
+interface Project {
+  number: string;
+  title: string;
+  description: string;
+  tags: string[];
+  highlights: string[];
+  github: string;
+  demo: string;
+  featured?: boolean;
+}
+
+const projects: Project[] = [
+  {
+    number: "01",
+    title: "AI/ML Crypto Primitive Identification in Firmware",
+    description:
+      "An AI/ML-powered framework for identifying cryptographic primitives and protocols in firmware binaries across heterogeneous architectures.",
+    tags: ["AI/ML", "Python", "PyTorch", "Cybersecurity"],
+    highlights: [
+      "Automated cryptographic analysis",
+      "ML-based pattern classification",
+      "Firmware binary analysis",
+      "Scalable detection pipeline",
+    ],
+    github: "https://github.com/ShryCreates/AI-ML_Crypto_Primitive_Identification_in_Firmware",
+    demo: "#",
+    featured: true,
+  },
+  {
+    number: "02",
+    title: "HealthLock — Hospital Management System",
+    description:
+      "A full-stack hospital management system for managing patient records, appointments, and hospital operations through a responsive interface and RESTful backend.",
+    tags: ["MERN Stack", "REST APIs", "MongoDB"],
+    highlights: [
+      "Patient record management",
+      "Appointment scheduling",
+      "RESTful API architecture",
+      "Responsive user interface",
+    ],
+    github: "https://github.com/ShryCreates/Health_Lock-A_Hospital_Management_System",
+    demo: "#",
+    featured: true,
+  },
+  {
+    number: "03",
+    title: "CertiProof",
+    description:
+      "AI-based certificate authenticity validator designed to detect fake and manipulated academic certificates using OCR, image processing, and machine learning.",
+    tags: ["Python", "TensorFlow", "PaddleOCR", "OpenCV"],
+    highlights: [
+      "AI-based academic certificate verification",
+      "OCR-based text extraction",
+      "Image manipulation detection",
+      "Automated authenticity analysis",
+    ],
+    github: "https://github.com/ShryCreates/CertiProof",
+    demo: "#",
+  },
+  {
+    number: "04",
+    title: "Project Management Tool",
+    description:
+      "A modern full-stack project management platform for creating projects, managing tasks, and organizing workflows with secure authentication and a responsive dashboard.",
+    tags: ["React.js", "Node.js", "MongoDB", "Express.js"],
+    highlights: [
+      "Project and task management",
+      "Team collaboration and workflow tracking",
+      "User authentication and role-based access",
+      "Responsive and intuitive dashboard",
+    ],
+    github: "https://github.com/ShryCreates/Project-Management-Tool",
+    demo: "#",
+  },
+  {
+    number: "05",
+    title: "Social Media Platform",
+    description:
+      "A modern full-stack social media platform where users can connect, share text and image posts, follow other users, and interact through likes and comments.",
+    tags: ["JavaScript", "Node.js", "MongoDB", "Express.js"],
+    highlights: [
+      "JWT-based authentication with protected routes",
+      "User profiles with follow/unfollow functionality",
+      "Create, edit, delete, and share image/text posts",
+      "Likes, comments, and user search functionality",
+    ],
+    github: "https://github.com/ShryCreates/Project-Management-Tool",
+    demo: "#",
+  },
+];
+
+// Featured card (large, alternating layout)
+function FeaturedCard({ project, flip }: { project: Project; flip?: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.65 }}
+      className={`flex flex-col lg:flex-row gap-0 rounded-3xl overflow-hidden border border-[#EDE8DF] shadow-sm hover:shadow-lg transition-all duration-400 ${
+        flip ? "lg:flex-row-reverse" : ""
+      }`}
+    >
+      {/* Colour panel */}
+      <div className="lg:w-2/5 bg-[#1A1A1A] p-8 lg:p-10 flex flex-col justify-between min-h-[260px] relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "radial-gradient(#F26522 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
+          }}
+        />
+        <div className="relative z-10">
+          <span className="text-[#F26522] text-7xl font-black opacity-30 leading-none select-none block mb-4">
+            {project.number}
+          </span>
+          <h3 className="text-2xl font-black text-white leading-snug">{project.title}</h3>
+        </div>
+        <div className="flex flex-wrap gap-2 relative z-10 mt-6">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 bg-white/10 text-white text-xs font-semibold rounded-full border border-white/20"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Content panel */}
+      <div className="lg:w-3/5 bg-white p-8 lg:p-10 flex flex-col justify-between">
+        <div>
+          <p className="text-[#6B6B6B] text-base leading-relaxed mb-6">{project.description}</p>
+          <ul className="space-y-2 mb-8">
+            {project.highlights.map((h, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-sm text-[#6B6B6B]">
+                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#F26522] flex-shrink-0" />
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex gap-3">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1A1A1A] text-white text-sm font-semibold rounded-full hover:bg-[#F26522] transition-all duration-300 hover:scale-105"
+          >
+            <Github className="w-4 h-4" />
+            GitHub
+          </a>
+          {project.demo !== "#" && (
+            <a
+              href={project.demo}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FDE8D8] text-[#F26522] text-sm font-semibold rounded-full hover:bg-[#F26522] hover:text-white transition-all duration-300 hover:scale-105"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Live Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// Compact card (small grid)
+function CompactCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.55 }}
+      whileHover={{ y: -6 }}
+      className="bg-white rounded-2xl p-6 border border-[#EDE8DF] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <span className="text-4xl font-black text-[#F26522] opacity-25 leading-none">{project.number}</span>
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-9 h-9 bg-[#F2EDE4] rounded-full flex items-center justify-center text-[#6B6B6B] hover:bg-[#F26522] hover:text-white transition-all duration-300"
+          aria-label={`GitHub: ${project.title}`}
+        >
+          <ArrowUpRight className="w-4 h-4" />
+        </a>
+      </div>
+      <h3 className="font-black text-base text-[#1A1A1A] leading-snug mb-2">{project.title}</h3>
+      <p className="text-sm text-[#6B6B6B] leading-relaxed mb-4 flex-1">{project.description}</p>
+      <div className="flex flex-wrap gap-1.5 mt-auto">
+        {project.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2.5 py-1 bg-[#FDE8D8] text-[#F26522] text-xs font-semibold rounded-full"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
 
 export function Projects() {
-  const projects = [
-    {
-      title: "HealthLock- A Hospital Management System",
-      description: "A comprehensive full-stack application for managing hospital operations, patient records, and appointments. Features responsive UI and robust backend with REST APIs.",
-      icon: Server,
-      color: "from-purple-600 to-pink-500",
-      tags: ["MERN Stack", "REST APIs", "Responsive Design"],
-      highlights: [
-        "Manages 100+ patient records efficiently",
-        "RESTful API architecture",
-        "Responsive and intuitive user interface",
-        "Real-time data synchronization",
-      ],
-      github: "https://github.com/ShryCreates/Health_Lock-A_Hospital_Management_System",
-      demo: "#",
-    },
-    {
-      title: "AI/ML Based Crypto Primitive Identification In Firmware",
-      description: "Machine learning-based detection system for identifying cryptographic primitives in code. Utilizes advanced ML algorithms for pattern recognition and classification.",
-      icon: Brain,
-      color: "from-cyan-500 to-blue-600",
-      tags: ["Machine Learning", "Python", "AI"],
-      highlights: [
-        "Improved detection accuracy by 40%",
-        "Advanced pattern recognition algorithms",
-        "Automated cryptographic analysis",
-        "Scalable ML pipeline",
-      ],
-      github: "https://github.com/ShryCreates/AI-ML_Crypto_Primitive_Identification_in_Firmware",
-      demo: "#",
-    },
-    {
-      title: "Malware Detection System",
-      description: "A full-stack malware detection system built with the MERN stack that analyzes file behavior and signatures to identify and classify malicious software in real time.",
-      icon: ShieldAlert,
-      color: "from-rose-500 to-orange-400",
-      tags: ["MERN Stack", "REST APIs", "Cybersecurity"],
-      highlights: [
-        "Real-time malware classification",
-        "Behavioral and signature-based analysis",
-        "RESTful API architecture",
-        "Responsive and intuitive dashboard",
-      ],
-      github: "https://github.com/ShryCreates/Malware_Detection_Web_App_Project",
-      demo: "#",
-    },
-    {
-      title: "Spotify Clone",
-      description: "A pixel-perfect Spotify UI clone built purely with HTML and CSS, replicating the look and feel of the Spotify web player with no JavaScript or frameworks.",
-      icon: Music,
-      color: "from-emerald-400 to-teal-600",
-      tags: ["HTML", "CSS"],
-      highlights: [
-        "Pixel-perfect Spotify UI recreation",
-        "Fully responsive layout",
-        "Pure HTML & CSS — no JavaScript",
-        "Custom styled components and animations",
-      ],
-      github: "https://github.com/ShryCreates/Spotify_Clone_Project",
-      demo: "#",
-    },
-    {
-      title: "Simon Says Game",
-      description: "An interactive Simon Says memory game built with HTML, CSS, and JavaScript, using DOM manipulation to handle game logic, sequences, and user interactions.",
-      icon: Gamepad2,
-      color: "from-amber-400 to-yellow-500",
-      tags: ["HTML", "CSS", "JavaScript", "DOM"],
-      highlights: [
-        "Dynamic sequence generation with DOM manipulation",
-        "Progressive difficulty as levels increase",
-        "Visual and interactive feedback on user input",
-        "Fully browser-based with no dependencies",
-      ],
-      github: "https://github.com/ShryCreates/Simon_Says_Game",
-      demo: "#",
-    },
-  ];
+  const featured = projects.filter((p) => p.featured);
+  const rest     = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-24 bg-[#F2EDE4] relative overflow-hidden">
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-            Featured Projects
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto rounded-full" />
+          <span className="h-px w-12 bg-[#F26522]" />
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F26522] uppercase">Selected Work</span>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-8">
-            {projects.map((project, index) => {
-              const Icon = project.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  whileHover={{ y: -10 }}
-                  className="bg-white/80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
-                >
-                  <div className={`bg-gradient-to-br ${project.color} p-6`}>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="bg-white/20 p-3 rounded-xl">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-white">{project.title}</h3>
-                    </div>
-                    <p className="text-white/90">{project.description}</p>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-3 py-1 bg-gradient-to-r from-purple-50 to-blue-50 text-purple-700 rounded-full text-sm font-medium border border-purple-100"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="space-y-2 mb-6">
-                      {project.highlights.map((highlight, hIndex) => (
-                        <div key={hIndex} className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0" />
-                          <p className="text-gray-600 text-sm">{highlight}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex gap-3">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span>GitHub</span>
-                      </a>
-                      <a
-                        href={project.demo}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span>Demo</span>
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-14">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#1A1A1A] leading-tight"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Featured
+            <br />
+            <span className="text-[#F26522]">Projects</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-[#6B6B6B] max-w-xs text-sm leading-relaxed lg:text-right"
+          >
+            A selection of projects showcasing my expertise in full-stack development, AI/ML, and cybersecurity.
+          </motion.p>
         </div>
+
+        {/* Featured projects — large alternating cards */}
+        <div className="space-y-6 mb-8">
+          {featured.map((project, i) => (
+            <FeaturedCard key={project.number} project={project} flip={i % 2 !== 0} />
+          ))}
+        </div>
+
+        {/* Remaining projects — compact grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {rest.map((project, i) => (
+            <CompactCard key={project.number} project={project} index={i} />
+          ))}
+        </div>
+
+        {/* GitHub CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12 flex justify-center"
+        >
+          <a
+            href="https://github.com/ShryCreates"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1A1A1A] text-white text-sm font-bold rounded-full hover:bg-[#F26522] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          >
+            <Github className="w-4 h-4" />
+            View All on GitHub
+          </a>
+        </motion.div>
       </div>
     </section>
   );
