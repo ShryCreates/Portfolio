@@ -18,7 +18,7 @@ const skillCategories = [
     icon: Server,
     title: "Backend",
     accent: "#F26522",
-    skills: ["Node.js", "Express.js", "REST APIs", "JWT Authentication"],
+    skills: ["Node.js", "Express.js", "REST APIs", "Fast API", "JWT Authentication"],
   },
   {
     icon: Database,
