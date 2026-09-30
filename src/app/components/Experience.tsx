@@ -29,10 +29,10 @@ const experiences: ExperienceEntry[] = [
       "Contributed across the SDLC, including development, testing, debugging, documentation, and deployment using Agile practices.",
       "Used Git, GitHub, Postman, Docker, Vercel, and Render for version control, API testing, containerization, and application deployment.",
     ],
-    credentials: [
-      // Ongoing — offer letter only. Replace "#" with the actual PDF path/URL when ready.
-      { label: "Offer Letter", url: "#" },
-    ],
+    // credentials: [
+    //   // Ongoing — offer letter only. Replace "#" with the actual PDF path/URL when ready.
+    //   { label: "Offer Letter", url: "#" },
+    // ],
   },
   {
     number: "02",
